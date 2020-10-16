@@ -1,0 +1,77 @@
+<html>
+
+<title>Party Disaply</title>
+<base href="http://127.0.0.1:1337/">
+<body>
+    <table>
+        <tr style="height: 150px;width: 720px;">
+            <td class="pkmn">
+                <img src="image/pokemon_gifs/bulbasaur.gif" alt="" class="sprite">
+            </td>
+            <td class="pkmn">
+                <img src="image/pokemon_gifs/bulbasaur.gif" alt="" class="sprite">
+            </td>
+            <td class="pkmn">
+                <img src="image/pokemon_gifs/bulbasaur.gif" alt="" class="sprite">
+            </td>
+            <td class="pkmn">
+                <img src="image/pokemon_gifs/bulbasaur.gif" alt="" class="sprite">
+            </td>
+            <td class="pkmn">
+                <img src="image/pokemon_gifs/bulbasaur.gif" alt="" class="sprite">
+            </td>
+            <td class="pkmn">
+                <img src="image/pokemon_gifs/bulbasaur.gif" alt="" class="sprite">
+            </td>
+        </tr>
+    </table>
+
+
+</body>
+
+<style>
+    body {
+        background-color: #00ff00;
+        color: #fff;
+        text-align: center;
+    }
+
+    .pkmn {
+        width: 120px;
+        margin: 10px;
+        vertical-align: bottom;
+    }
+
+    .sprite {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+<script type="text/javascript">  
+
+    function updateImage()
+    {
+        var name = location.href.split("/").slice(-1); 
+        fetch('/party-changes/' + name).then(function(response) {
+            return response.json()
+        }).then(function(data) {
+            var images = document.getElementsByTagName('img');
+            for (i = 0; i < data.length; i++) {
+                var slot = data[i].slot_id - 1
+                var speciesName = data[i].pokemon.speciesName
+                var prevName = images[slot].src.split('\\').pop().split('/').pop().split('.').slice(0, -1).join('.');
+                console.log(prevName)
+                if(prevName != speciesName) {
+                    images[slot].src = "image/pokemon_gifs/" + speciesName + ".gif"
+                }
+            }
+        }).catch(function(error) {
+            console.log(error)
+        })
+    }
+    setInterval(updateImage, 200);
+</script>
+
+</html>
