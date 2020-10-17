@@ -64,7 +64,8 @@
                 var prevName = images[slot].src.split('\\').pop().split('/').pop().split('.').slice(0, -1).join('.');
                 console.log(prevName)
                 if(prevName != speciesName) {
-                    images[slot].src = "image/pokemon_gifs/" + speciesName + ".gif"
+                    var source = "image/pokemon_gifs/" + speciesName + ".gif"
+                    images[slot].src = source.toLowerCase()
                 }
             }
         }).catch(function(error) {
