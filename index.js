@@ -26,7 +26,7 @@ app.use(less(path.join(__dirname,'source','less'),{
 app.use(express.static(path.join(__dirname, 'public')));
 
 // setup server
-var server = app.listen(1337);
+var server = app.listen(8080);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.post('/update-party', update_party);
@@ -66,7 +66,6 @@ async function update_party(req, res) {
 }
 
 async function get_party(req, res) {
-    console.log(parties[req.params.streamer])
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
     res.end(JSON.stringify(parties[req.params.streamer]));
