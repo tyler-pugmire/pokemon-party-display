@@ -60,7 +60,7 @@
             var images = document.getElementsByTagName('img');
             for (i = 0; i < data.length; i++) {
                 var slot = data[i].slot_id - 1
-                var speciesName = data[i].pokemon.speciesName
+                var speciesName = data[i].pokemon.speciesName.toLowerCase()
                 var prevName = images[slot].src.split('\\').pop().split('/').pop().split('.').slice(0, -1).join('.');
                 console.log(prevName)
                 if(prevName != speciesName) {
